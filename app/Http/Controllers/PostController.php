@@ -133,4 +133,12 @@ class PostController extends Controller
             $post->updateHotnessScore();
         });
     }
+
+    public function show(Post $post)
+    {
+        // Eager load relations for the view
+        $post->load(['user', 'category']);
+
+        return view('posts.show', compact('post'));
+    }
 }
