@@ -16,12 +16,32 @@
             </button>
 
             @auth
-                <a href="/upload" class="bg-[#4A3728] dark:bg-orange-500 text-white px-5 py-2 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-orange-500/20">
+                <a href="/upload" class="hidden sm:block bg-[#4A3728] dark:bg-orange-500 text-white px-4 py-2 rounded-xl font-bold text-xs hover:scale-105 transition-all">
                     + Post
                 </a>
-                <a href="{{ route('dashboard') }}" class="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 hover:ring-orange-300 transition-all">
-                    <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
-                </a>
+
+                <div class="flex items-center gap-3 pl-3 border-l border-orange-100 dark:border-white/10">
+                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2 group">
+                        <div class="text-right hidden md:block">
+                            <div class="text-[11px] font-black text-[#4A3728] dark:text-white leading-none">
+                                {{ auth()->user()->name }}
+                            </div>
+                            <span class="text-[9px] text-orange-500 font-bold uppercase tracking-tighter">Account</span>
+                        </div>
+                        <div class="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 group-hover:ring-orange-300 transition-all">
+                            <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
+                        </div>
+                    </a>
+
+                    <form action="{{ route('logout') }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="p-2 rounded-xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors" title="Logout">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
             @else
                 <a href="{{ route('login') }}" class="font-bold text-sm text-[#4A3728] dark:text-[#E9DCC9] px-4">Login</a>
             @endauth
