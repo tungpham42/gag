@@ -119,10 +119,10 @@
                             text: 'Could not log in. Please try again.',
                             buttonsStyling: false,
                             customClass: {
-                                popup: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl',
-                                title: 'text-slate-800 dark:text-white font-bold',
-                                htmlContainer: 'text-slate-500 dark:text-slate-400 mt-2 text-sm',
-                                confirmButton: 'w-full justify-center flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl transition-all font-semibold shadow-sm mt-4'
+                                popup: 'bg-white/90 dark:bg-[#1C1926]/90 backdrop-blur-2xl border border-orange-100/50 dark:border-white/5 rounded-[3rem] shadow-2xl shadow-orange-900/10 dark:shadow-black/40 p-8',
+                                title: 'text-[#4A3728] dark:text-white font-black text-2xl mt-4',
+                                htmlContainer: 'text-[#8C7A6B] dark:text-gray-400 mt-3 text-sm font-medium leading-relaxed',
+                                confirmButton: 'w-full justify-center flex items-center bg-orange-400 hover:bg-orange-500 text-white px-6 py-3 rounded-full transition-all transform hover:scale-[1.02] font-bold shadow-lg shadow-orange-500/20 mt-6 border-none'
                             }
                         });
                     }

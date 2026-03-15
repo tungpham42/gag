@@ -14,7 +14,7 @@
         <p class="text-[#8C7A6B] dark:text-gray-400 mb-10 text-sm font-medium">Grab a coffee, settle in, and browse the best memes on the web.</p>
 
         <div class="flex justify-center transform hover:scale-105 transition-transform bg-white dark:bg-white/5 p-2 rounded-full border border-orange-50 dark:border-white/5 shadow-sm">
-            <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
+            <div id="google-signin-button" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
         </div>
 
         <p class="mt-10 text-[10px] text-[#A69689] dark:text-gray-500 uppercase tracking-widest font-black">
@@ -23,3 +23,49 @@
     </div>
 </div>
 @endsection
+
+
+@push('scripts')
+<script>
+    const renderGoogleButton = setInterval(() => {
+        if (typeof google !== 'undefined' && google.accounts && google.accounts.id) {
+
+            // 1. Explicitly initialize here to bypass the window.onload delay in app.blade.php.
+            // This guarantees the client is ready before we attempt to render the button.
+            google.accounts.id.initialize({
+                client_id: '{{ config('services.google.client_id') }}',
+                callback: handleCredentialResponse,
+            });
+
+            // 2. Determine the current theme
+            const isDark = document.documentElement.classList.contains('dark');
+
+            // 3. Render the standard button (This bypasses any One Tap rate limits/thresholds)
+            google.accounts.id.renderButton(
+                document.getElementById("google-signin-button"),
+                {
+                    theme: isDark ? 'filled_black' : 'outline',
+                    size: "large",
+                    shape: "pill",
+                    type: "standard",
+                    text: "signin_with"
+                }
+            );
+
+            clearInterval(renderGoogleButton);
+        }
+    }, 100);
+
+    // Re-render the button if the user toggles dark mode while on the page
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        setTimeout(() => {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.getElementById("google-signin-button").innerHTML = ''; // Clear existing button
+            google.accounts.id.renderButton(
+                document.getElementById("google-signin-button"),
+                { theme: isDark ? 'filled_black' : 'outline', size: "large", shape: "pill", type: "standard" }
+            );
+        }, 50);
+    });
+</script>
+@endpush
