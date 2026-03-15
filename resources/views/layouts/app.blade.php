@@ -148,5 +148,46 @@
             }
         </script>
     @endguest
+        <div x-data="{
+            showTop: false,
+            showBottom: true,
+            update() {
+                this.showTop = window.pageYOffset > 400;
+                this.showBottom = (window.innerHeight + window.pageYOffset) < (document.documentElement.scrollHeight - 400);
+            }
+        }"
+        x-init="update()"
+        @scroll.window="update()"
+        class="fixed bottom-6 right-6 flex flex-col gap-3 z-50">
+
+        <button
+            x-show="showTop"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-4"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-end="opacity-0 translate-y-4"
+            @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="p-3 rounded-full bg-orange-400 dark:bg-orange-600 text-white shadow-lg hover:bg-orange-500 dark:hover:bg-orange-500 transition-all active:scale-90"
+            title="Back to Top">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="Wait 5 10l7-7m0 0l7 7m-7-7v18" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+        </button>
+
+        <button
+            x-show="showBottom"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 -translate-y-4"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-end="opacity-0 -translate-y-4"
+            @click="window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'smooth'})"
+            class="p-3 rounded-full bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-md text-[#4A3728] dark:text-[#E9DCC9] border border-orange-100 dark:border-white/10 shadow-lg hover:bg-orange-50 dark:hover:bg-white/10 transition-all active:scale-90"
+            title="Scroll to Bottom">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+    </div>
 </body>
 </html>
