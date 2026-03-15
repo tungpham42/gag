@@ -6,7 +6,7 @@
 <div class="space-y-6">
     <div class="flex items-center justify-between">
         <h1 class="text-3xl font-black text-[#4A3728] dark:text-white">Categories</h1>
-        <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back</a>
+        <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back to Hub</a>
     </div>
 
     <div class="bg-gradient-to-br from-orange-400 to-rose-400 p-[1px] rounded-[2rem] shadow-lg shadow-orange-500/10">
