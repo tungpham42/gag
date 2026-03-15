@@ -23,7 +23,7 @@
 
         <div class="flex items-center space-x-1 border border-gray-300 dark:border-gray-700 rounded-full p-1 bg-gray-50 dark:bg-[#1a1a1a]">
 
-            <form action="/posts/{{ $post->id }}/upvote" method="POST" class="m-0">
+            <form action="{{ route('posts.show', $post) }}/upvote" method="POST" class="m-0">
                 @csrf
                 <button type="submit" class="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -36,7 +36,7 @@
                 {{ $post->upvotes - $post->downvotes }}
             </span>
 
-            <form action="/posts/{{ $post->id }}/downvote" method="POST" class="m-0">
+            <form action="{{ route('posts.show', $post) }}/downvote" method="POST" class="m-0">
                 @csrf
                 <button type="submit" class="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-red-500 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -47,7 +47,7 @@
         </div>
 
         <div class="flex items-center space-x-3">
-            <a href="/posts/{{ $post->id }}" class="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition font-semibold text-sm">
+            <a href="{{ route('posts.show', $post) }}" class="flex items-center space-x-2 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition font-semibold text-sm">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                 </svg>

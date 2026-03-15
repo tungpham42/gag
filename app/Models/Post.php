@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
     protected $fillable = [
+        'slug',
         'user_id',
         'title',
         'media_path',
@@ -16,6 +19,22 @@ class Post extends Model
         'hotness_score',
         'category_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            // Generates 6 random alphanumeric characters
+            $post->slug = Str::random(6);
+        });
+    }
+
+    // Update the route key name to use slug instead of ID for URLs
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function updateHotnessScore(): void
     {
@@ -31,12 +50,12 @@ class Post extends Model
         ]);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
