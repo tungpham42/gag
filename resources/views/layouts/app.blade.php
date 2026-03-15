@@ -45,7 +45,16 @@
     </script>
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HHXZSNQ65X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-HHXZSNQ65X");
+    </script>
 </head>
 <body class="transition-colors duration-500 bg-[#FDF8F1] text-[#4A3728] dark:bg-[#121016] dark:text-[#E9DCC9] font-sans antialiased selection:bg-orange-200 selection:text-orange-900">
 
@@ -61,6 +70,22 @@
     </div>
 
     <main class="max-w-[800px] mx-auto py-10 px-4 sm:px-6">
+        @guest
+            <div class="h-40 w-full max-w-7xl mx-auto mb-6 block text-center overflow-hidden">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536"
+                    crossorigin="anonymous"></script>
+                <!-- GAG_res -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-3585118770961536"
+                    data-ad-slot="1220526671"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        @endguest
         @yield('content')
     </main>
 
@@ -80,5 +105,64 @@
             .then(data => { if (data.redirect) window.location.href = data.redirect; });
         }
     </script>
+    @guest
+        <script>
+            window.addEventListener('load', function() {
+                // Wait a couple of seconds to give AdSense time to load naturally
+                setTimeout(function() {
+                    // If window.adsbygoogle doesn't exist or hasn't been fully loaded, an ad blocker is likely active
+                    const isAdBlockActive = typeof window.adsbygoogle === 'undefined' || window.adsbygoogle.loaded !== true;
+
+                    // Additionally, check if the ad container itself was forcefully hidden by a cosmetic filter
+                    const adContainer = document.querySelector('ins.adsbygoogle');
+                    const isHidden = adContainer && window.getComputedStyle(adContainer).display === 'none';
+
+                    if (isAdBlockActive || isHidden) {
+                        Swal.fire({
+                            title: 'Ad Blocker Detected 🛑',
+                            html: `
+                                It looks like you are using an ad blocker.<br><br>
+                                Ads help keep <strong>SOFT Gag</strong> running and free for everyone.
+                                Please consider whitelisting our site or
+                                <a href="/login" class="font-bold text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300">
+                                    login with an account
+                                </a>!<br><br>
+                                Thank you for your support!
+                            `,
+                            icon: 'warning',
+                            confirmButtonText: 'I Understand',
+                            allowOutsideClick: false,
+                            buttonsStyling: false,
+                            customClass: {
+                                popup: `
+                                    bg-white dark:bg-[#1C1926]
+                                    border border-orange-100 dark:border-white/5
+                                    rounded-[1.5rem]
+                                    shadow-[0_20px_60px_rgba(120,60,20,0.15)]
+                                    dark:shadow-none
+                                `,
+                                title: `
+                                    text-[#4A3728] dark:text-white
+                                    font-black text-xl tracking-tight
+                                `,
+                                htmlContainer: `
+                                    text-[#8C7A6B] dark:text-gray-400
+                                    mt-2 text-sm leading-relaxed
+                                `,
+                                confirmButton: `
+                                    w-full flex items-center justify-center
+                                    bg-gradient-to-r from-orange-500 to-rose-500
+                                    hover:scale-105 hover:shadow-lg
+                                    text-white px-5 py-2.5
+                                    rounded-2xl font-bold text-sm
+                                    transition-all mt-4
+                                `
+                            }
+                        });
+                    }
+                }, 2000); // 2000ms delay prevents false positives on slow connections
+            });
+        </script>
+    @endguest
 </body>
 </html>
