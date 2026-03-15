@@ -1,5 +1,5 @@
 <nav class="sticky top-4 z-50 px-4">
-    <div class="max-w-[800px] mx-auto bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-lg border border-orange-100 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none rounded-[2rem] px-6 h-16 flex items-center justify-between">
+    <div class="max-w-[900px] mx-auto bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-lg border border-orange-100 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none rounded-[2rem] px-6 h-16 flex items-center justify-between">
 
         <a href="/" class="group flex items-center gap-2">
             <div class="w-10 h-10 bg-gradient-to-tr from-orange-400 to-rose-400 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
@@ -20,27 +20,52 @@
                     + Post
                 </a>
 
-                <div class="flex items-center gap-3 pl-3 border-l border-orange-100 dark:border-white/10">
-                    <div class="flex items-center gap-2 group">
-                        <div class="text-right hidden md:block">
-                            <div class="text-[11px] font-black text-[#4A3728] dark:text-white leading-none">
-                                {{ auth()->user()->name }}
+                <div class="flex items-center gap-3 pl-3 border-l border-orange-100 dark:border-white/10" x-data="{ open: false }">
+                    <div class="relative">
+                        <button @click="open = !open" @click.away="open = false" class="flex items-center gap-2 group focus:outline-none">
+                            <div class="text-right hidden md:block">
+                                <div class="text-[11px] font-black text-[#4A3728] dark:text-white leading-none">
+                                    {{ auth()->user()->name }}
+                                </div>
+                                <span class="text-[9px] text-orange-500 font-bold uppercase tracking-tighter">Account</span>
                             </div>
-                            <span class="text-[9px] text-orange-500 font-bold uppercase tracking-tighter">Account</span>
-                        </div>
-                        <div class="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 group-hover:ring-orange-300 transition-all">
-                            <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
+                            <div class="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 group-hover:ring-orange-300 transition-all">
+                                <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
+                            </div>
+                        </button>
+
+                        <div x-show="open"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            class="absolute right-0 mt-3 w-48 bg-white dark:bg-[#1C1926] border border-orange-50 dark:border-white/5 rounded-2xl shadow-xl py-2 z-50">
+
+                            @if(auth()->user()->is_admin)
+                                <div class="px-4 py-2 text-[10px] font-bold text-orange-500 uppercase tracking-widest border-b border-orange-50 dark:border-white/5 mb-1">
+                                    Admin Tools
+                                </div>
+                                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm text-[#4A3728] dark:text-white hover:bg-orange-50 dark:hover:bg-white/5 transition-colors font-medium">
+                                    <svg class="w-4 h-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Management Hub
+                                </a>
+                            @endif
+
+                            <a href="/profile" class="flex items-center gap-2 px-4 py-2 text-sm text-[#4A3728] dark:text-white hover:bg-orange-50 dark:hover:bg-white/5 transition-colors font-medium">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                My Profile
+                            </a>
+
+                            <div class="h-px bg-orange-50 dark:bg-white/5 my-1"></div>
+
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors font-bold text-left">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                    Logout
+                                </button>
+                            </form>
                         </div>
                     </div>
-
-                    <form action="{{ route('logout') }}" method="POST" class="inline">
-                        @csrf
-                        <button type="submit" class="p-2 rounded-xl text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-colors" title="Logout">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                            </svg>
-                        </button>
-                    </form>
                 </div>
             @else
                 <a href="{{ route('login') }}" class="font-bold text-sm text-[#4A3728] dark:text-[#E9DCC9] px-4">Login</a>
