@@ -55,7 +55,7 @@
         <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-rose-200 dark:bg-indigo-900 rounded-full blur-[120px]"></div>
     </div>
 
-    <main class="max-w-[@if(auth()->user()->is_admin) 1280px @else 640px @endif] mx-auto py-10 px-4">
+    <main class="max-w-[@if(auth()->user()->is_admin) 900px @else 640px @endif] mx-auto py-10 px-4">
         @yield('content')
     </main>
 
