@@ -18,7 +18,7 @@ class AdminController extends Controller
             'users_count' => User::count(),
             'posts_count' => Post::count(),
             'categories_count' => Category::count(),
-            'recent_posts' => Post::with(['user', 'category'])->latest()->take(10)->get(),
+            'recent_posts' => Post::latest()->take(10)->get(),
         ]);
     }
 
