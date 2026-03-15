@@ -67,4 +67,4 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
 });
 
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/gag/{post}', [PostController::class, 'show'])->name('posts.show');
