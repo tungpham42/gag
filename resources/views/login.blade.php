@@ -13,7 +13,7 @@
         <h1 class="text-3xl font-black mb-3 text-[#4A3728] dark:text-white leading-tight">Welcome home!</h1>
         <p class="text-[#8C7A6B] dark:text-gray-400 mb-10 text-sm font-medium">Grab a coffee, settle in, and browse the best memes on the web.</p>
 
-        <div class="flex justify-center transform hover:scale-105 transition-transform bg-white dark:bg-white/5 p-2 rounded-full border border-orange-50 dark:border-white/5 shadow-sm">
+        <div class="flex justify-center">
             <div id="google-signin-button" class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_blue" data-text="continue_with" data-size="large" data-logo_alignment="left"></div>
         </div>
 
