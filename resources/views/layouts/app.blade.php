@@ -27,8 +27,9 @@
             scrollbar-color: #FB923C transparent; /* thumb | track */
         }
 
-        input, textarea, select, button {
+        input:focus-visible, textarea:focus-visible, select:focus-visible {
             outline-color: rgb(249 115 22 / 0.5) !important;
+            border-color: rgb(249 115 22 / 0.5) !important;
         }
 
         .dark * {
