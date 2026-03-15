@@ -59,13 +59,7 @@
     $(document).ready(function() {
         // Initialize DataTable
         $('#usersTable').DataTable({
-            responsive: {
-                details: {
-                    display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                    type: 'none',
-                    target: ''
-                }
-            },
+            responsive: true,
             pageLength: 25,
             language: { search: "", searchPlaceholder: "Find a user..." }
         });

@@ -77,13 +77,7 @@
 <script>
     $(document).ready(function() {
         $('#all-posts-table').DataTable({
-            responsive: {
-                details: {
-                    display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                    type: 'none',
-                    target: ''
-                }
-            },
+            responsive: true,
             language: { search: "", searchPlaceholder: "Search memes..." },
             columnDefs: [{ orderable: false, targets: [0, 4] }]
         });

@@ -68,13 +68,7 @@
     $(document).ready(function() {
         // Initialize DataTable
         $('#categories-table').DataTable({
-            responsive: {
-                details: {
-                    display: $.fn.dataTable.Responsive.display.childRowImmediate,
-                    type: 'none',
-                    target: ''
-                }
-            },
+            responsive: true,
             language: { search: "", searchPlaceholder: "Filter categories..." },
             pageLength: 10,
         });
