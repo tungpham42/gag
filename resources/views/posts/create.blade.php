@@ -39,7 +39,10 @@
             <div>
                 <label class="block text-xs font-black text-[#8C7A6B] dark:text-gray-400 uppercase tracking-widest mb-2 ml-2">Title</label>
                 <input type="text" name="title" required
-                    class="w-full px-6 py-4 rounded-[1.5rem] bg-orange-50/50 dark:bg-white/5 border-2 border-transparent focus:border-orange-200 dark:focus:border-orange-500/50 focus:ring-4 focus:ring-orange-500/10 text-[#4A3728] dark:text-white transition-all font-medium placeholder:text-[#A69689]"
+                    class="w-full px-6 py-4 rounded-[1.5rem] bg-orange-50/50 dark:bg-white/5 border-2 border-transparent
+                        focus:outline-none focus:border-orange-400/50 dark:focus:border-orange-500/50
+                        focus:ring-4 focus:ring-orange-500/10 text-[#4A3728] dark:text-white transition-all
+                        font-medium placeholder:text-[#A69689] active:scale-[0.99]"
                     placeholder="Enter a funny title...">
                 @error('title') <p class="text-rose-500 text-xs mt-2 ml-2 font-bold">{{ $message }}</p> @enderror
             </div>
