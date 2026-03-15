@@ -1,0 +1,75 @@
+@extends('layouts.app')
+
+@section('title', 'Manage Categories - SOFTGag')
+
+@section('content')
+<div class="space-y-6">
+    <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-black text-[#4A3728] dark:text-white">Categories</h1>
+        <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back</a>
+    </div>
+
+    <div class="bg-gradient-to-br from-orange-400 to-rose-400 p-[1px] rounded-[2rem] shadow-lg shadow-orange-500/10">
+        <div class="bg-white dark:bg-[#1C1926] rounded-[2rem] p-6">
+            <h2 class="text-sm font-black uppercase tracking-widest text-[#8C7A6B] mb-4">Create New Category</h2>
+            <form action="{{ route('admin.categories.store') }}" method="POST" class="flex gap-3">
+                @csrf
+                <input type="text" name="name" placeholder="Category Name (e.g. Wholesome)"
+                       class="flex-1 bg-orange-50/50 dark:bg-white/5 border-none rounded-2xl px-5 py-3 text-[#4A3728] dark:text-white focus:ring-2 focus:ring-orange-200 outline-none transition-all" required>
+                <button type="submit" class="bg-[#4A3728] dark:bg-orange-500 text-white px-8 py-3 rounded-2xl font-bold hover:scale-105 active:scale-95 transition-all">
+                    Add ✨
+                </button>
+            </form>
+            @error('name') <p class="text-rose-500 text-xs mt-2 ml-4 font-bold">{{ $message }}</p> @enderror
+        </div>
+    </div>
+
+    <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] border border-orange-50 dark:border-white/5 shadow-xl p-6">
+        <table id="categories-table" class="w-full text-left">
+            <thead>
+                <tr class="text-xs uppercase tracking-wider text-[#8C7A6B] border-b border-orange-50 dark:border-white/5">
+                    <th class="px-6 py-4 font-bold">Name</th>
+                    <th class="px-6 py-4 font-bold">Slug</th>
+                    <th class="px-6 py-4 font-bold">Meme Count</th>
+                    <th class="px-6 py-4 font-bold text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-orange-50 dark:divide-white/5">
+                @foreach ($categories as $category)
+                <tr class="hover:bg-orange-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <td class="px-6 py-4">
+                        <span class="font-black text-[#4A3728] dark:text-white">{{ $category->name }}</span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-400 font-mono">/{{ $category->slug }}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 rounded-full text-xs font-black">
+                            {{ $category->posts_count }} posts
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        @if($category->posts_count == 0)
+                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button class="text-rose-400 hover:text-rose-600 font-bold text-xs uppercase tracking-tighter">Remove</button>
+                            </form>
+                        @else
+                            <span class="text-[10px] text-gray-300 uppercase font-bold">In Use</span>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#categories-table').DataTable({
+            responsive: true,
+            language: { search: "", searchPlaceholder: "Filter categories..." },
+            pageLength: 10
+        });
+    });
+</script>
+@endsection

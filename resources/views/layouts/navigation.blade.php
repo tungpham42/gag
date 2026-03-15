@@ -1,0 +1,30 @@
+<nav class="sticky top-4 z-50 px-4">
+    <div class="max-w-[800px] mx-auto bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-lg border border-orange-100 dark:border-white/5 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none rounded-[2rem] px-6 h-16 flex items-center justify-between">
+
+        <a href="/" class="group flex items-center gap-2">
+            <div class="w-10 h-10 bg-gradient-to-tr from-orange-400 to-rose-400 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform">
+                <span class="font-black text-xl italic">S</span>
+            </div>
+            <span class="text-xl font-bold tracking-tight">SOFT<span class="text-orange-500 ml-1">Gag</span></span>
+        </a>
+
+        <div class="flex items-center gap-3">
+            <button @click="theme = theme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', theme)"
+                    class="p-2.5 rounded-2xl bg-orange-50 dark:bg-white/5 hover:bg-orange-100 dark:hover:bg-white/10 transition-all text-orange-600 dark:text-orange-300">
+                <svg x-show="theme === 'dark'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 100 2h1z"></path></svg>
+                <svg x-show="theme === 'light'" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            </button>
+
+            @auth
+                <a href="/upload" class="bg-[#4A3728] dark:bg-orange-500 text-white px-5 py-2 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-md shadow-orange-500/20">
+                    + Post
+                </a>
+                <a href="{{ route('dashboard') }}" class="w-10 h-10 rounded-2xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 hover:ring-orange-300 transition-all">
+                    <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="font-bold text-sm text-[#4A3728] dark:text-[#E9DCC9] px-4">Login</a>
+            @endauth
+        </div>
+    </div>
+</nav>
