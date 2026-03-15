@@ -3,7 +3,8 @@
 @section('content')
 <div class="space-y-6">
     <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] p-8 border border-orange-50 dark:border-white/5 shadow-xl">
-        <h2 class="text-2xl font-black mb-6">Community Members</h2>
+        <h1 class="text-2xl font-black mb-6">Community Members</h1>
+        <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back</a>
 
         <table id="usersTable" class="w-full">
             <thead>
