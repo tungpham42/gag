@@ -29,13 +29,6 @@
         <h1 class="text-3xl font-black text-[#4A3728] dark:text-white">Management Hub</h1>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 mb-8">
-        <div class="bg-white dark:bg-[#1C1926] p-6 rounded-[2rem] border border-orange-50 dark:border-white/5 shadow-xl shadow-black/[0.02] text-center">
-            <span class="block font-black text-4xl text-orange-500">{{ $users_count }}</span>
-            <span class="text-xs text-[#8C7A6B] dark:text-gray-400 uppercase font-bold tracking-widest">Users</span>
-        </div>
-        </div>
-
     <div class="bg-white dark:bg-[#1C1926] rounded-[2rem] border border-orange-50 dark:border-white/5 p-6 shadow-xl shadow-black/[0.02]">
         <h2 class="font-bold text-lg text-[#4A3728] dark:text-white mb-6">All Posts</h2>
 
