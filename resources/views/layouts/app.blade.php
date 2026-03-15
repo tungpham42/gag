@@ -54,10 +54,15 @@
         <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-200 dark:bg-purple-900 rounded-full blur-[120px]"></div>
         <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-rose-200 dark:bg-indigo-900 rounded-full blur-[120px]"></div>
     </div>
-
-    <main class="max-w-[@if(auth()->user()->is_admin) 900px @else 640px @endif] mx-auto py-10 px-4">
+    @if(auth()->user()->is_admin)
+    <main class="max-w-[900px] mx-auto py-10 px-4">
         @yield('content')
     </main>
+    @else
+    <main class="max-w-[600px] mx-auto py-10 px-4">
+        @yield('content')
+    </main>
+    @endif
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
