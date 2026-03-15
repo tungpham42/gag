@@ -20,6 +20,49 @@
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.tailwindcss.css">
 
+    <style>
+        /* Firefox Support */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #FB923C transparent; /* thumb | track */
+        }
+
+        .dark * {
+            scrollbar-color: #4A3728 transparent;
+        }
+
+        /* Chrome, Edge, and Safari Support */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Light Mode Thumb */
+        ::-webkit-scrollbar-thumb {
+            background-color: #fed7aa; /* orange-200 */
+            border-radius: 20px;
+            border: 3px solid #FDF8F1; /* matches your light bg */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #fb923c; /* orange-400 */
+        }
+
+        /* Dark Mode Thumb */
+        .dark ::-webkit-scrollbar-thumb {
+            background-color: #2D2A35; /* subtle dark purple/gray */
+            border: 3px solid #121016; /* matches your dark bg */
+        }
+
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background-color: #ea580c; /* orange-600 */
+        }
+    </style>
+
     @stack('styles')
 
     <script>
