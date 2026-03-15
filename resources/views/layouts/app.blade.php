@@ -98,11 +98,23 @@
         function handleCredentialResponse(response) {
             fetch("{{ route('auth.google.verify') }}", {
                 method: "POST",
-                headers: { "Content-Type": "application/json", "X-CSRF-TOKEN": "{{ csrf_token() }}" },
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
                 body: JSON.stringify({ credential: response.credential })
             })
-            .then(res => res.json())
-            .then(data => { if (data.redirect) window.location.href = data.redirect; });
+            .then(res => {
+                if (res.ok) {
+                    // Force a redirect to the home page on successful authentication
+                    window.location.href = "/";
+                } else {
+                    console.error("Google authentication failed on the server.");
+                }
+            })
+            .catch(error => {
+                console.error('Error during Google authentication request:', error);
+            });
         }
     </script>
     @guest
