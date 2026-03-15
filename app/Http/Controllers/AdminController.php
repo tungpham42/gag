@@ -25,7 +25,7 @@ class AdminController extends Controller
     // --- POSTS ---
     public function posts()
     {
-        $posts = Post::with(['user', 'category'])->latest()->get();
+        $posts = Post::latest()->get();
         return view('admin.posts.index', compact('posts'));
     }
 
