@@ -22,10 +22,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/upload', [PostController::class, 'create'])->name('posts.create');
     Route::post('/upload', [PostController::class, 'store'])->name('posts.store');
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-
     Route::post('/posts/{post}/upvote', [PostController::class, 'upvote'])->name('posts.upvote');
     Route::post('/posts/{post}/downvote', [PostController::class, 'downvote'])->name('posts.downvote');
     Route::post('/logout', [GoogleOneTapController::class, 'logout'])->name('logout');

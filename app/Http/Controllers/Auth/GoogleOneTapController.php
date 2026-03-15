@@ -35,7 +35,7 @@ class GoogleOneTapController extends Controller
 
             return response()->json([
                 'message' => 'Login successful',
-                'redirect' => route('dashboard')
+                'redirect' => route('/')
             ]);
         }
 
