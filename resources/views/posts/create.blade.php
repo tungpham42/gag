@@ -6,12 +6,31 @@
 <div class="max-w-xl mx-auto">
     <div class="bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-xl rounded-[3rem] border border-orange-100/50 dark:border-white/5 overflow-hidden shadow-2xl shadow-orange-900/5 dark:shadow-black/10 p-8 sm:p-10">
 
-        <div class="mb-10 text-center">
+        <div class="mb-8 text-center">
             <div class="w-16 h-16 bg-gradient-to-tr from-orange-300 to-rose-300 rounded-[2rem] mx-auto flex items-center justify-center mb-4 shadow-lg shadow-orange-500/20 text-white">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
             </div>
             <h1 class="text-3xl font-black text-[#4A3728] dark:text-white">Share a Smile</h1>
             <p class="text-[#8C7A6B] dark:text-gray-400 mt-2 font-medium">Upload your best meme and spread the joy.</p>
+        </div>
+
+        <div class="mb-10 relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-orange-400 to-rose-400 rounded-[2rem] blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+            <div class="relative flex flex-col sm:flex-row items-center justify-between gap-4 p-5 bg-white dark:bg-[#121016] rounded-[1.8rem] border border-orange-100 dark:border-white/5">
+                <div class="flex items-center gap-4 text-center sm:text-left">
+                    <div class="hidden sm:flex w-12 h-12 shrink-0 bg-orange-50 dark:bg-orange-500/10 rounded-2xl items-center justify-center text-orange-500">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-black text-[#4A3728] dark:text-white">Need to create a meme?</h4>
+                        <p class="text-[11px] text-[#8C7A6B] dark:text-gray-500 font-medium">Use our online editor to make something funny.</p>
+                    </div>
+                </div>
+                <a href="https://meme.soft.io.vn" target="_blank"
+                   class="shrink-0 w-full sm:w-auto px-6 py-2.5 bg-orange-400 hover:bg-orange-500 text-white text-xs font-black uppercase tracking-widest rounded-full transition-all text-center">
+                    Launch Editor
+                </a>
+            </div>
         </div>
 
         <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
@@ -55,15 +74,6 @@
                         </div>
                     </label>
                 </div>
-
-                <div class="mt-4 flex justify-center">
-                    <a href="https://meme.soft.io.vn" target="_blank"
-                       class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-100 dark:border-white/5 text-[10px] font-black uppercase tracking-widest text-[#8C7A6B] dark:text-gray-500 hover:bg-orange-50 dark:hover:bg-white/5 hover:text-orange-500 transition-all group">
-                        <svg class="w-3.5 h-3.5 text-orange-300 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-                        Try our Meme Creator
-                    </a>
-                </div>
-
                 @error('file') <p class="text-rose-500 text-xs mt-2 ml-2 font-bold">{{ $message }}</p> @enderror
             </div>
 
