@@ -5,12 +5,32 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleOneTapController;
+use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 
+Route::get('/test-redis', function () {
+    // Check if the cache exists
+    if (Cache::has('browser_test')) {
+        return "Loaded from Redis Cache: " . Cache::get('browser_test');
+    }
+
+    // If not, set it for 1 minute (60 seconds)
+    $message = "This is fresh data created at " . now();
+    Cache::put('browser_test', $message, 60);
+
+    return "Saved to Redis. Refresh the page! Data: " . $message;
+});
+
 // Publicly accessible feed
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
+
+// -----------------------------------------------------------------------------
+// Sitemap Route (MUST go above the wildcard)
+// -----------------------------------------------------------------------------
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 // -----------------------------------------------------------------------------
 // Authentication Routes
