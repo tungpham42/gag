@@ -55,6 +55,15 @@
                         </div>
                     </label>
                 </div>
+
+                <div class="mt-4 flex justify-center">
+                    <a href="https://meme.soft.io.vn" target="_blank"
+                       class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-100 dark:border-white/5 text-[10px] font-black uppercase tracking-widest text-[#8C7A6B] dark:text-gray-500 hover:bg-orange-50 dark:hover:bg-white/5 hover:text-orange-500 transition-all group">
+                        <svg class="w-3.5 h-3.5 text-orange-300 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                        Try our Meme Creator
+                    </a>
+                </div>
+
                 @error('file') <p class="text-rose-500 text-xs mt-2 ml-2 font-bold">{{ $message }}</p> @enderror
             </div>
 
