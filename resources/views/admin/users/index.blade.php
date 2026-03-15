@@ -3,8 +3,10 @@
 @section('content')
 <div class="space-y-6">
     <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] p-8 border border-orange-50 dark:border-white/5 shadow-xl">
-        <h1 class="text-2xl font-black mb-6">Community Members</h1>
-        <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back</a>
+        <div class="flex items-center justify-between">
+            <h1 class="text-3xl font-black text-[#4A3728] dark:text-white">Community Members</h1>
+            <a href="{{ route('admin.dashboard') }}" class="text-sm font-bold text-orange-500 hover:text-orange-600">&larr; Back</a>
+        </div>
 
         <table id="usersTable" class="w-full">
             <thead>
