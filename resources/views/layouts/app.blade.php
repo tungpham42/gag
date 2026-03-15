@@ -28,8 +28,8 @@
         }
 
         input:focus-visible, textarea:focus-visible, select:focus-visible {
-            outline-color: rgb(249 115 22 / 0.5) !important;
-            border-color: rgb(249 115 22 / 0.5) !important;
+            outline-color: rgba(249, 115, 22, 0.5) !important;
+            border-color: rgba(249, 115, 22, 0.5) !important;
         }
 
         .dark * {
