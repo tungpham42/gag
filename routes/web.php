@@ -46,3 +46,5 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::patch('/users/{user}/toggle', [AdminController::class, 'toggleAdmin'])->name('users.toggle');
     Route::delete('/users/{user}', [AdminController::class, 'destroyUser'])->name('users.destroy');
 });
+
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
