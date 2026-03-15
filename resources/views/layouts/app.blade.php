@@ -28,7 +28,7 @@
         }
 
         input, textarea, select, button {
-            outline-color: #FB923C !important;
+            outline-color: rgb(249 115 22 / 0.1) !important;
         }
 
         .dark * {
