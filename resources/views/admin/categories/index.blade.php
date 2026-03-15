@@ -25,41 +25,43 @@
     </div>
 
     <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] border border-orange-50 dark:border-white/5 shadow-xl p-6">
-        <table id="categories-table" class="w-full text-left">
-            <thead>
-                <tr class="text-xs uppercase tracking-wider text-[#8C7A6B] border-b border-orange-50 dark:border-white/5">
-                    <th class="px-6 py-4 font-bold">Name</th>
-                    <th class="px-6 py-4 font-bold">Slug</th>
-                    <th class="px-6 py-4 font-bold">Meme Count</th>
-                    <th class="px-6 py-4 font-bold text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-orange-50 dark:divide-white/5">
-                @foreach ($categories as $category)
-                <tr class="hover:bg-orange-50/50 dark:hover:bg-white/[0.02] transition-colors">
-                    <td class="px-6 py-4">
-                        <span class="font-black text-[#4A3728] dark:text-white">{{ $category->name }}</span>
-                    </td>
-                    <td class="px-6 py-4 text-sm text-gray-400 font-mono">/{{ $category->slug }}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 rounded-full text-xs font-black">
-                            {{ $category->posts_count }} posts
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        @if($category->posts_count == 0)
-                            <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="delete-category-form inline">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="text-rose-400 hover:text-rose-600 font-bold text-xs uppercase tracking-tighter">Remove</button>
-                            </form>
-                        @else
-                            <span class="text-[10px] text-gray-300 uppercase font-bold">In Use</span>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="overflow-x-auto">
+            <table id="categories-table" class="w-full text-left whitespace-nowrap">
+                <thead>
+                    <tr class="text-xs uppercase tracking-wider text-[#8C7A6B] border-b border-orange-50 dark:border-white/5">
+                        <th class="px-6 py-4 font-bold">Name</th>
+                        <th class="px-6 py-4 font-bold">Slug</th>
+                        <th class="px-6 py-4 font-bold">Meme Count</th>
+                        <th class="px-6 py-4 font-bold text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-orange-50 dark:divide-white/5">
+                    @foreach ($categories as $category)
+                    <tr class="hover:bg-orange-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                        <td class="px-6 py-4">
+                            <span class="font-black text-[#4A3728] dark:text-white">{{ $category->name }}</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-400 font-mono">/{{ $category->slug }}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500 rounded-full text-xs font-black">
+                                {{ $category->posts_count }} posts
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            @if($category->posts_count == 0)
+                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="delete-category-form inline">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="text-rose-400 hover:text-rose-600 font-bold text-xs uppercase tracking-tighter">Remove</button>
+                                </form>
+                            @else
+                                <span class="text-[10px] text-gray-300 uppercase font-bold">In Use</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

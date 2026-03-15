@@ -10,47 +10,50 @@
             &larr; Back to Hub
         </a>
     </div>
-    <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] p-8 border border-orange-50 dark:border-white/5 shadow-xl">
 
-        <table id="usersTable" class="w-full">
-            <thead>
-                <tr class="text-left text-[#8C7A6B] uppercase text-xs tracking-widest">
-                    <th class="pb-4">User</th>
-                    <th class="pb-4">Role</th>
-                    <th class="pb-4">Joined</th>
-                    <th class="pb-4 text-right">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-orange-50 dark:divide-white/5">
-                @foreach($users as $user)
-                <tr>
-                    <td class="py-4 flex items-center gap-3">
-                        <img src="{{ $user->avatar }}" class="w-10 h-10 rounded-2xl">
-                        <div>
-                            <div class="font-bold">{{ $user->name }}</div>
-                            <div class="text-xs text-gray-400">{{ $user->email }}</div>
-                        </div>
-                    </td>
-                    <td class="py-4">
-                        <span class="{{ $user->is_admin ? 'text-orange-500' : 'text-gray-400' }} font-bold text-xs uppercase">
-                            {{ $user->is_admin ? 'Admin' : 'User' }}
-                        </span>
-                    </td>
-                    <td class="py-4 text-sm">{{ $user->created_at->format('M Y') }}</td>
-                    <td class="py-4 text-right space-x-2">
-                        <form action="{{ route('admin.users.toggle', $user) }}" method="POST" class="inline toggle-form">
-                            @csrf @method('PATCH')
-                            <button type="submit" class="text-xs font-bold text-indigo-500 hover:underline">Toggle Role</button>
-                        </form>
-                        <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline ban-form">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="text-xs font-bold text-rose-500 hover:underline">Ban</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="bg-white dark:bg-[#1C1926] rounded-[2.5rem] p-4 sm:p-8 border border-orange-50 dark:border-white/5 shadow-xl">
+
+        <div class="overflow-x-auto">
+            <table id="usersTable" class="w-full min-w-full whitespace-nowrap">
+                <thead>
+                    <tr class="text-left text-[#8C7A6B] uppercase text-xs tracking-widest">
+                        <th class="pb-4 px-2">User</th>
+                        <th class="pb-4 px-2">Role</th>
+                        <th class="pb-4 px-2">Joined</th>
+                        <th class="pb-4 px-2 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-orange-50 dark:divide-white/5">
+                    @foreach($users as $user)
+                    <tr>
+                        <td class="py-4 px-2 flex items-center gap-3">
+                            <img src="{{ $user->avatar }}" class="w-10 h-10 rounded-2xl min-w-[2.5rem]">
+                            <div>
+                                <div class="font-bold">{{ $user->name }}</div>
+                                <div class="text-xs text-gray-400">{{ $user->email }}</div>
+                            </div>
+                        </td>
+                        <td class="py-4 px-2">
+                            <span class="{{ $user->is_admin ? 'text-orange-500' : 'text-gray-400' }} font-bold text-xs uppercase">
+                                {{ $user->is_admin ? 'Admin' : 'User' }}
+                            </span>
+                        </td>
+                        <td class="py-4 px-2 text-sm">{{ $user->created_at->format('M Y') }}</td>
+                        <td class="py-4 px-2 text-right space-x-2">
+                            <form action="{{ route('admin.users.toggle', $user) }}" method="POST" class="inline toggle-form">
+                                @csrf @method('PATCH')
+                                <button type="submit" class="text-xs font-bold text-indigo-500 hover:underline">Toggle Role</button>
+                            </form>
+                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline ban-form">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="text-xs font-bold text-rose-500 hover:underline">Ban</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -109,7 +112,7 @@
                 buttonsStyling: false,
                 customClass: {
                     ...swalCustomClasses,
-                    confirmButton: 'flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-full transition-all font-bold shadow-lg border-none mx-2 mt-4' // Override with danger color
+                    confirmButton: 'flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-full transition-all font-bold shadow-lg border-none mx-2 mt-4'
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
