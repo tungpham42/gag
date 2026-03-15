@@ -21,7 +21,7 @@
                 </a>
 
                 <div class="flex items-center gap-3 pl-3 border-l border-orange-100 dark:border-white/10">
-                    <a href="{{ route('dashboard') }}" class="flex items-center gap-2 group">
+                    <div class="flex items-center gap-2 group">
                         <div class="text-right hidden md:block">
                             <div class="text-[11px] font-black text-[#4A3728] dark:text-white leading-none">
                                 {{ auth()->user()->name }}
@@ -31,7 +31,7 @@
                         <div class="w-9 h-9 rounded-xl overflow-hidden ring-2 ring-orange-100 dark:ring-white/10 group-hover:ring-orange-300 transition-all">
                             <img src="{{ auth()->user()->avatar }}" class="w-full h-full object-cover">
                         </div>
-                    </a>
+                    </div>
 
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
