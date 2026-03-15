@@ -94,29 +94,59 @@
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.tailwindcss.js"></script>
 
     @stack('scripts')
-    <script>
-        function handleCredentialResponse(response) {
-            fetch("{{ route('auth.google.verify') }}", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ credential: response.credential })
-            })
-            .then(res => {
-                if (res.ok) {
-                    // Force a redirect to the home page on successful authentication
-                    window.location.href = "/";
-                } else {
-                    console.error("Google authentication failed on the server.");
+    @guest
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script>
+            function handleCredentialResponse(response) {
+                fetch('{{ route('auth.google.verify') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({ credential: response.credential })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.redirect) {
+                        window.location.href = data.redirect;
+                    } else {
+                        console.error('Login failed:', data.message);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Failed',
+                            text: 'Could not log in. Please try again.',
+                            buttonsStyling: false,
+                            customClass: {
+                                popup: 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-xl',
+                                title: 'text-slate-800 dark:text-white font-bold',
+                                htmlContainer: 'text-slate-500 dark:text-slate-400 mt-2 text-sm',
+                                confirmButton: 'w-full justify-center flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl transition-all font-semibold shadow-sm mt-4'
+                            }
+                        });
+                    }
+                })
+                .catch(error => console.error('Network Error:', error));
+            }
+
+            window.onload = function () {
+                google.accounts.id.initialize({
+                    client_id: '{{ config('services.google.client_id') }}',
+                    callback: handleCredentialResponse,
+                    auto_select: false,
+                    cancel_on_tap_outside: true
+                });
+                google.accounts.id.prompt();
+
+                const loginBtn = document.getElementById('google-login-btn');
+                if(loginBtn) {
+                    loginBtn.addEventListener('click', () => {
+                        google.accounts.id.prompt();
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('Error during Google authentication request:', error);
-            });
-        }
-    </script>
+            }
+        </script>
+    @endguest
 </body>
 </html>
