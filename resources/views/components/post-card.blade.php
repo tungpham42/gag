@@ -23,7 +23,7 @@
 
         <div class="flex items-center space-x-1 border border-gray-300 dark:border-gray-700 rounded-full p-1 bg-gray-50 dark:bg-[#1a1a1a]">
 
-            <form action="{{ route('posts.show', $post) }}/upvote" method="POST" class="m-0">
+            <form action="{{ route('posts.upvote', $post) }}" method="POST" class="m-0">
                 @csrf
                 <button type="submit" class="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-blue-500 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -36,7 +36,7 @@
                 {{ $post->upvotes - $post->downvotes }}
             </span>
 
-            <form action="{{ route('posts.show', $post) }}/downvote" method="POST" class="m-0">
+            <form action="{{ route('posts.downvote', $post) }}" method="POST" class="m-0">
                 @csrf
                 <button type="submit" class="p-1.5 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 hover:text-red-500 transition">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -53,6 +53,15 @@
                 </svg>
                 <span>Comments</span>
             </a>
+        </div>
+
+        <div class="flex items-center justify-between mt-4">
+            @if($post->category)
+                <a href="{{ route('categories.show', $post->category->slug) }}"
+                class="text-[10px] font-bold text-orange-500 hover:text-rose-500 uppercase tracking-tighter transition-colors">
+                    #{{ $post->category->name }}
+                </a>
+            @endif
         </div>
 
     </div>

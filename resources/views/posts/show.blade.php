@@ -50,9 +50,16 @@
                 </form>
             </div>
 
-            <div class="text-[11px] font-bold text-[#8C7A6B] uppercase tracking-widest bg-orange-50 dark:bg-white/5 px-4 py-2 rounded-xl">
-                {{ $post->category->name ?? 'General' }}
-            </div>
+            @if($post->category)
+                <a href="{{ route('categories.show', $post->category->slug) }}"
+                class="text-[11px] font-bold text-[#8C7A6B] hover:text-orange-500 uppercase tracking-widest bg-orange-50 dark:bg-white/5 px-4 py-2 rounded-xl transition-colors">
+                    {{ $post->category->name }}
+                </a>
+            @else
+                <div class="text-[11px] font-bold text-[#8C7A6B] uppercase tracking-widest bg-orange-50 dark:bg-white/5 px-4 py-2 rounded-xl">
+                    General
+                </div>
+            @endif
         </div>
     </article>
 </div>

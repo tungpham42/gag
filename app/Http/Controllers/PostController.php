@@ -14,9 +14,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderByDesc('hotness_score')->paginate(24);
+        // Fetch all categories sorted by name
+        $categories = Category::orderBy('name')->get();
 
-        return view('posts.index', compact('posts'));
+        $posts = Post::orderByDesc('hotness_score')
+                    ->orderByDesc('created_at')
+                    ->paginate(24);
+
+        // Pass both $posts and $categories to the view
+        return view('posts.index', compact('posts', 'categories'));
     }
 
     public function create()
@@ -29,7 +35,7 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|max:255',
-            'category_id' => 'required|exists:categories,id', // Added validation
+            'category_id' => 'required|exists:categories,id',
             'file' => 'required|file|mimes:jpg,jpeg,png,gif,mp4|max:20480',
         ]);
 
@@ -39,13 +45,17 @@ class PostController extends Controller
 
         $path = $file->store('memes', 'public');
 
-        Post::create([
+        // Assign the created post to a variable
+        $post = Post::create([
             'user_id' => auth()->id(),
-            'category_id' => $request->category_id, // Added this
+            'category_id' => $request->category_id,
             'title' => $request->title,
             'media_path' => $path,
             'media_type' => $type,
         ]);
+
+        // FIX: Automatically cast an upvote from the author to initialize the Hotness math
+        $this->handleVote($post, $request->user(), 1);
 
         return redirect()->route('posts.index')->with('success', 'Meme uploaded!');
     }
@@ -77,7 +87,6 @@ class PostController extends Controller
     private function handleVote(Post $post, $user, int $value): void
     {
         DB::transaction(function () use ($post, $user, $value) {
-            // Check if the user has already voted on this specific post
             $existingVote = DB::table('votes')
                 ->where('user_id', $user->id)
                 ->where('votable_id', $post->id)
@@ -85,7 +94,8 @@ class PostController extends Controller
                 ->first();
 
             if ($existingVote) {
-                if ($existingVote->value === $value) {
+                // FIX: Cast the existing value to an integer before strictly comparing
+                if ((int) $existingVote->value === $value) {
                     // 1. Toggle Off: User clicked the same vote button again
                     DB::table('votes')->where('id', $existingVote->id)->delete();
 
@@ -127,8 +137,7 @@ class PostController extends Controller
                 }
             }
 
-            // Refresh the model to get the newly incremented/decremented values,
-            // then trigger your custom hotness algorithm.
+            // Refresh the model to get the newly incremented/decremented values
             $post->refresh();
             $post->updateHotnessScore();
         });
