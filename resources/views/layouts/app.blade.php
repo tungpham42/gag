@@ -27,11 +27,6 @@
             scrollbar-color: #FB923C transparent; /* thumb | track */
         }
 
-        input:focus-visible, textarea:focus-visible, select:focus-visible {
-            outline-color: rgba(249, 115, 22, 0.5) !important;
-            border-color: rgba(249, 115, 22, 0.5) !important;
-        }
-
         .dark * {
             scrollbar-color: #4A3728 transparent;
         }
