@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleOneTapController;
 use App\Models\Post;
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/posts/{post}/upvote', [PostController::class, 'upvote'])->name('posts.upvote');
     Route::post('/posts/{post}/downvote', [PostController::class, 'downvote'])->name('posts.downvote');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/logout', [GoogleOneTapController::class, 'logout'])->name('logout');
 });
 
