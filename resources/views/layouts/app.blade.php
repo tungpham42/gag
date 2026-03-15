@@ -27,6 +27,10 @@
             scrollbar-color: #FB923C transparent; /* thumb | track */
         }
 
+        input, textarea, select, button {
+            outline-color: #FB923C !important;
+        }
+
         .dark * {
             scrollbar-color: #4A3728 transparent;
         }
