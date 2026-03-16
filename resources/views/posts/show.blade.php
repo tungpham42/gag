@@ -31,18 +31,24 @@
 
                     <div x-show="shareOpen" x-transition.opacity.duration.200ms style="display: none;" class="absolute right-0 mt-2 w-48 bg-white/95 dark:bg-[#1A1721]/95 backdrop-blur-xl rounded-[1.5rem] shadow-2xl border border-white/60 dark:border-white/10 py-2 overflow-hidden">
                         <div class="px-4 py-2 text-[10px] font-black text-[#8C7A6B] dark:text-gray-500 uppercase tracking-widest border-b border-orange-50 dark:border-white/5 mb-1">Share Post</div>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', $post)) }}" target="_blank" class="flex items-center gap-3 px-4 py-2 text-sm font-bold text-[#8C7A6B] dark:text-gray-300 hover:text-[#1877F2] dark:hover:text-[#1877F2] hover:bg-orange-50 dark:hover:bg-white/5 transition-colors">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg> Facebook
+                        </a>
+                        <a href="https://x.com/intent/tweet?url={{ urlencode(route('posts.show', $post)) }}&text={{ urlencode($post->title) }}" target="_blank" class="flex items-center gap-3 px-4 py-2 text-sm font-bold text-[#8C7A6B] dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-orange-50 dark:hover:bg-white/5 transition-colors">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X (Twitter)
+                        </a>
                         <button onclick="navigator.clipboard.writeText('{{ route('posts.show', $post) }}');" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-[#8C7A6B] dark:text-gray-300 hover:text-[#E1306C] dark:hover:text-[#E1306C] hover:bg-orange-50 dark:hover:bg-white/5 transition-colors text-left">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163..."></path></svg> Copy Link
                         </button>
                     </div>
                 </div>
             </div>
-            <h1 class="text-3xl md:text-5xl font-black text-[#4A3728] dark:text-white leading-tight tracking-tight">
+            <h1 class="text-3xl md:text-3xl font-black text-[#4A3728] dark:text-white leading-tight tracking-tight">
                 {{ $post->title }}
             </h1>
         </div>
 
-        <div class="bg-[#FDF8F1]/40 dark:bg-black/40 w-full flex justify-center items-center py-6 border-y border-white/50 dark:border-white/5 relative">
+        <div class="z-[-1] bg-[#FDF8F1]/40 dark:bg-black/40 w-full flex justify-center items-center py-6 border-y border-white/50 dark:border-white/5 relative">
             <div class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
             @if($post->media_type === 'video')
                 <video controls autoplay loop class="w-full max-h-[800px] object-contain rounded-2xl shadow-lg z-10">

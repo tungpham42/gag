@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="w-full bg-[#FDF8F1]/40 dark:bg-black/30 flex justify-center items-center relative overflow-hidden">
+    <div class="z-[-1] w-full bg-[#FDF8F1]/40 dark:bg-black/30 flex justify-center items-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
         @if($post->media_type === 'video')
             <video controls loop class="max-h-[600px] w-auto max-w-full z-10">
