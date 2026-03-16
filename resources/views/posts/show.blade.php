@@ -2,6 +2,8 @@
 
 @section('title', $post->title . ' - SOFT Gag')
 
+@section('og_image', $post->image_url)
+
 @section('content')
 <div class="space-y-6">
     <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-[#8C7A6B] hover:text-orange-500 transition-colors group bg-white/50 dark:bg-white/5 px-4 py-2 rounded-xl border border-orange-100/50 dark:border-white/5">

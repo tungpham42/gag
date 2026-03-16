@@ -9,7 +9,7 @@
     <title>@yield('title', 'SOFT Gag')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="SOFT Gag - Your go-to platform for sharing memes and funny content online with ease and security." />
-    <meta property="og:image" content="{{ asset('1200x630.jpg') }}" />
+    <meta property="og:image" content="@yield('og_image', asset('1200x630.jpg'))" />
     <meta property="og:image:type" content="image/jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
