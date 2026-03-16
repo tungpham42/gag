@@ -2,7 +2,7 @@
 
 @section('title', $post->title . ' - SOFT Gag')
 
-@section('og_image', $post->image_url)
+@section('og_image', asset('storage/' . $post->media_path))
 
 @section('content')
 <div class="space-y-6">
