@@ -3,21 +3,21 @@
 @section('content')
     <div class="space-y-8">
 
-        <div class="flex gap-3 overflow-x-auto pb-4 scrollbar-hide snap-x items-center">
+        <div class="flex gap-3 overflow-x-auto pt-4 pb-6 -mt-4 px-1 scrollbar-hide snap-x items-center">
             <a href="{{ route('posts.index') }}"
-               class="snap-start whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-black transition-all duration-300
+               class="snap-start whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-black transition-all duration-300 relative
                {{ !isset($category)
-                  ? 'bg-gradient-to-r from-orange-400 to-rose-400 text-white shadow-lg shadow-orange-500/20 scale-105 ring-2 ring-white/50 dark:ring-white/10'
-                  : 'bg-white/60 dark:bg-white/5 backdrop-blur-md text-[#8C7A6B] dark:text-gray-400 border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:text-orange-500 dark:hover:text-white hover:-translate-y-0.5 shadow-sm' }}">
+                  ? 'bg-gradient-to-r from-orange-400 to-rose-400 text-white shadow-lg shadow-orange-500/20 scale-105 ring-2 ring-white/50 dark:ring-white/10 z-10'
+                  : 'bg-white/60 dark:bg-white/5 backdrop-blur-md text-[#8C7A6B] dark:text-gray-400 border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:text-orange-500 dark:hover:text-white hover:-translate-y-1.5 hover:scale-110 hover:z-10 hover:shadow-md shadow-sm' }}">
                 All Smiles
             </a>
 
             @foreach($categories as $cat)
                 <a href="{{ route('categories.show', $cat->slug) }}"
-                   class="snap-start whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-black transition-all duration-300
+                   class="snap-start whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-black transition-all duration-300 relative
                    {{ isset($category) && $category->id === $cat->id
-                      ? 'bg-gradient-to-r from-orange-400 to-rose-400 text-white shadow-lg shadow-orange-500/20 scale-105 ring-2 ring-white/50 dark:ring-white/10'
-                      : 'bg-white/60 dark:bg-white/5 backdrop-blur-md text-[#8C7A6B] dark:text-gray-400 border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:text-orange-500 dark:hover:text-white hover:-translate-y-0.5 shadow-sm' }}">
+                      ? 'bg-gradient-to-r from-orange-400 to-rose-400 text-white shadow-lg shadow-orange-500/20 scale-105 ring-2 ring-white/50 dark:ring-white/10 z-10'
+                      : 'bg-white/60 dark:bg-white/5 backdrop-blur-md text-[#8C7A6B] dark:text-gray-400 border border-white/60 dark:border-white/5 hover:bg-white dark:hover:bg-white/10 hover:text-orange-500 dark:hover:text-white hover:-translate-y-1.5 hover:scale-110 hover:z-10 hover:shadow-md shadow-sm' }}">
                     {{ $cat->name }}
                 </a>
             @endforeach
