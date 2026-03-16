@@ -3,7 +3,7 @@
 @section('content')
     <div class="space-y-8">
 
-        <div class="flex gap-3 overflow-x-auto pt-4 pb-6 -mt-4 px-1 scrollbar-hide snap-x items-center">
+        <div class="flex gap-3 overflow-x-auto pt-4 pb-6 -mt-4 px-4 -mx-4 scrollbar-hide snap-x items-center">
             <a href="{{ route('posts.index') }}"
                class="snap-start whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-black transition-all duration-300 relative
                {{ !isset($category)
