@@ -26,46 +26,23 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.tailwindcss.css">
 
     <style>
-        /* Firefox Support */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: #FB923C transparent; /* thumb | track */
-        }
+        /* Tối ưu Scrollbar tinh tế hơn */
+        * { scrollbar-width: thin; scrollbar-color: rgba(251, 146, 60, 0.5) transparent; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: rgba(251, 146, 60, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: rgba(234, 88, 12, 0.8); }
 
-        .dark * {
-            scrollbar-color: #4A3728 transparent;
+        /* Animation cho Background Blobs */
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
         }
-
-        /* Chrome, Edge, and Safari Support */
-        ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        /* Light Mode Thumb */
-        ::-webkit-scrollbar-thumb {
-            background-color: #fed7aa; /* orange-200 */
-            border-radius: 20px;
-            border: 3px solid #FDF8F1; /* matches your light bg */
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #fb923c; /* orange-400 */
-        }
-
-        /* Dark Mode Thumb */
-        .dark ::-webkit-scrollbar-thumb {
-            background-color: #2D2A35; /* subtle dark purple/gray */
-            border: 3px solid #121016; /* matches your dark bg */
-        }
-
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background-color: #ea580c; /* orange-600 */
-        }
+        .animate-blob { animation: blob 7s infinite; }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
     </style>
 
     @stack('styles')
@@ -86,6 +63,9 @@
                 extend: {
                     fontFamily: {
                         sans: ['"Lexend Deca"', 'sans-serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite'
                     }
                 }
             }
@@ -107,20 +87,21 @@
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536" crossorigin="anonymous"></script>
     @endguest
 </head>
-<body class="transition-colors duration-500 bg-[#FDF8F1] text-[#4A3728] dark:bg-[#121016] dark:text-[#E9DCC9] font-sans antialiased selection:bg-orange-200 selection:text-orange-900">
+<body class="transition-colors duration-700 bg-[#FCF8F3] text-[#4A3728] dark:bg-[#0D0B11] dark:text-[#E9DCC9] font-sans antialiased selection:bg-orange-300/30 selection:text-orange-900 dark:selection:text-orange-100 relative min-h-screen">
 
     @guest
     <div id="g_id_onload" data-client_id="{{ config('services.google.client_id') }}" data-callback="handleCredentialResponse" data-auto_prompt="true"></div>
     @endguest
 
-    @include('layouts.navigation')
-
-    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 overflow-hidden opacity-30 dark:opacity-20 pointer-events-none">
-        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-orange-200/60 dark:bg-orange-900/40 rounded-full blur-[140px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-rose-200/50 dark:bg-rose-900/30 rounded-full blur-[140px]"></div>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-orange-300/30 dark:bg-orange-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[40%] h-[40%] bg-rose-300/30 dark:bg-rose-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[50%] h-[50%] bg-amber-200/30 dark:bg-amber-600/10 rounded-full blur-[120px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
     </div>
 
-    <main class="max-w-[800px] mx-auto py-10 px-4 sm:px-6">
+    @include('layouts.navigation')
+
+    <main class="max-w-[800px] mx-auto py-10 px-4 sm:px-6 relative z-10">
         @yield('content')
     </main>
 
@@ -130,7 +111,6 @@
 
     @stack('scripts')
     @guest
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script>
             function handleCredentialResponse(response) {
                 fetch('{{ route('auth.google.verify') }}', {
@@ -154,10 +134,10 @@
                             text: 'Could not log in. Please try again.',
                             buttonsStyling: false,
                             customClass: {
-                                popup: 'bg-white/90 dark:bg-[#1C1926]/90 backdrop-blur-2xl border border-orange-100/50 dark:border-white/5 rounded-[3rem] shadow-2xl shadow-orange-900/10 dark:shadow-black/40 p-8',
+                                popup: 'bg-white/90 dark:bg-[#1C1926]/90 backdrop-blur-2xl border border-white/50 dark:border-white/5 rounded-[3rem] shadow-2xl shadow-orange-900/10 dark:shadow-black/40 p-8',
                                 title: 'text-[#4A3728] dark:text-white font-black text-2xl mt-4',
                                 htmlContainer: 'text-[#8C7A6B] dark:text-gray-400 mt-3 text-sm font-medium leading-relaxed',
-                                confirmButton: 'w-full justify-center flex items-center bg-orange-400 hover:bg-orange-500 text-white px-6 py-3 rounded-full transition-all transform hover:scale-[1.02] font-bold shadow-lg shadow-orange-500/20 mt-6 border-none'
+                                confirmButton: 'w-full justify-center flex items-center bg-gradient-to-r from-orange-400 to-rose-400 text-white px-6 py-3 rounded-full transition-all transform hover:scale-[1.02] font-bold shadow-lg shadow-orange-500/20 mt-6 border-none'
                             }
                         });
                     }
@@ -202,11 +182,10 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-end="opacity-0 translate-y-4"
             @click="window.scrollTo({top: 0, behavior: 'smooth'})"
-            class="p-3 rounded-full bg-orange-400 dark:bg-orange-600 text-white shadow-lg hover:bg-orange-500 dark:hover:bg-orange-500 transition-all active:scale-90"
+            class="p-3 rounded-2xl bg-gradient-to-tr from-orange-400 to-rose-400 text-white shadow-lg shadow-orange-500/30 hover:scale-110 hover:-translate-y-1 transition-all active:scale-95 border border-white/20"
             title="Back to Top">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="Wait 5 10l7-7m0 0l7 7m-7-7v18" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
         </button>
 
@@ -217,10 +196,10 @@
             x-transition:leave="transition ease-in duration-200"
             x-transition:leave-end="opacity-0 -translate-y-4"
             @click="window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'smooth'})"
-            class="p-3 rounded-full bg-white/80 dark:bg-[#1C1926]/80 backdrop-blur-md text-[#4A3728] dark:text-[#E9DCC9] border border-orange-100 dark:border-white/10 shadow-lg hover:bg-orange-50 dark:hover:bg-white/10 transition-all active:scale-90"
+            class="p-3 rounded-2xl bg-white/80 dark:bg-[#1A1721]/80 backdrop-blur-xl text-[#4A3728] dark:text-[#E9DCC9] border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none hover:bg-orange-50 dark:hover:bg-white/10 hover:scale-110 hover:translate-y-1 transition-all active:scale-95"
             title="Scroll to Bottom">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
             </svg>
         </button>
     </div>
