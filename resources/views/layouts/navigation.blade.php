@@ -16,8 +16,9 @@
             </button>
 
             @auth
-                <a href="/upload" class="hidden sm:flex items-center justify-center bg-gradient-to-r from-[#4A3728] to-[#604938] dark:from-orange-500 dark:to-rose-500 text-white px-5 py-2.5 rounded-2xl font-bold text-sm hover:scale-105 hover:shadow-lg transition-all">
-                    + Post
+                <a href="/upload" class="flex items-center justify-center bg-gradient-to-r from-[#4A3728] to-[#604938] dark:from-orange-500 dark:to-rose-500 text-white px-4 sm:px-5 py-2.5 rounded-2xl font-bold text-sm hover:scale-105 hover:shadow-lg transition-all">
+                    <span>+</span>
+                    <span class="hidden sm:inline ml-1">Post</span>
                 </a>
 
                 <div class="flex items-center gap-3 pl-2 sm:pl-4 border-l border-orange-100 dark:border-white/10" x-data="{ open: false }">
