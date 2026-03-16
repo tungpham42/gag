@@ -103,6 +103,7 @@
       gtag("js", new Date());
       gtag("config", "G-HHXZSNQ65X");
     </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536" crossorigin="anonymous"></script>
 </head>
 <body class="transition-colors duration-500 bg-[#FDF8F1] text-[#4A3728] dark:bg-[#121016] dark:text-[#E9DCC9] font-sans antialiased selection:bg-orange-200 selection:text-orange-900">
 
@@ -118,22 +119,6 @@
     </div>
 
     <main class="max-w-[800px] mx-auto py-10 px-4 sm:px-6">
-        @guest
-            <div class="h-40 w-full max-w-7xl mx-auto mb-6 block text-center overflow-hidden">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536"
-                    crossorigin="anonymous"></script>
-                <!-- GAG_res -->
-                <ins class="adsbygoogle"
-                    style="display:block"
-                    data-ad-client="ca-pub-3585118770961536"
-                    data-ad-slot="1220526671"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        @endguest
         @yield('content')
     </main>
 
