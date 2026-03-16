@@ -103,7 +103,9 @@
       gtag("js", new Date());
       gtag("config", "G-HHXZSNQ65X");
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536" crossorigin="anonymous"></script>
+    @guest
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3585118770961536" crossorigin="anonymous"></script>
+    @endguest
 </head>
 <body class="transition-colors duration-500 bg-[#FDF8F1] text-[#4A3728] dark:bg-[#121016] dark:text-[#E9DCC9] font-sans antialiased selection:bg-orange-200 selection:text-orange-900">
 
