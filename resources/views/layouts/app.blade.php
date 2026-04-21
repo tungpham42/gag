@@ -109,7 +109,8 @@
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.tailwindcss.js"></script>
 
-    <script src="https://platform.soft.io.vn/wp-json/saas/v1/embed.js?api_key=sk_live_LnFaKwLoGUiBTMtZ4Bef8C5j" defer></script>
+    <!-- AI Chat Widget -->
+    <script src="https://saas.soft.io.vn/api/saas/v1/embed.js?api_key=sk_live_XPdKbpXLSIGlEWlNspbH1K3b" defer></script>
 
     @stack('scripts')
     @guest
