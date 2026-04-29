@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'SOFT Gag')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="SOFT Gag - Your go-to platform for sharing memes and funny content online with ease and security." />
+    <meta name="description" content="SOFT Gag - Your go-to platform for sharing memes and funny content online." />
     <meta property="og:image" content="@yield('og_image', asset('1200x630.jpg'))" />
     <meta property="og:image:type" content="image/jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:title" content="@yield('title', 'SOFT Gag')" />
-    <meta property="og:description" content="SOFT Gag - Your go-to platform for sharing memes and funny content online with ease and security." />
+    <meta property="og:description" content="SOFT Gag - Your go-to platform for sharing memes and funny content online." />
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
