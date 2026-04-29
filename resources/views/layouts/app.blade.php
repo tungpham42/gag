@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en"
-      x-data="{ theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') }"
+      x-data="{
+          theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+          init() {
+              // Listen for system/browser theme changes in real-time
+              window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                  if (!localStorage.getItem('theme')) {
+                      this.theme = e.matches ? 'dark' : 'light';
+                  }
+              });
+          }
+      }"
       :class="{ 'dark': theme === 'dark' }"
       class="scroll-smooth">
 <head>
@@ -48,11 +58,23 @@
     @stack('styles')
 
     <script>
-        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
+        function applySystemTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
         }
+
+        // Apply theme immediately on load
+        applySystemTheme();
+
+        // Listen for system theme changes without refreshing the page
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            if (!('theme' in localStorage)) {
+                applySystemTheme();
+            }
+        });
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -109,7 +131,6 @@
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.2/js/dataTables.tailwindcss.js"></script>
 
-    <!-- AI Chat Widget -->
     <script src="https://saas.soft.io.vn/api/saas/v1/embed.js?api_key=sk_live_XPdKbpXLSIGlEWlNspbH1K3b" defer></script>
 
     @stack('scripts')
